@@ -1,8 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
 
+/*el truco: al envolver la propiedad styles en un array , e incluir
+en las props un style adicional de caracter opcional, la prop de
+la derecha, de existir, hara override de la de la izquierda que seria
+la default */
 const Card = props => (
-  <View style={styles.containerStyle}>
+  <View style={[styles.containerStyle, props.style]}>
     { props.children }
   </View>
 );
