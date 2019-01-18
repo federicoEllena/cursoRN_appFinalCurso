@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import { emailChanged, passwordChanged } from './actions';
@@ -8,6 +9,7 @@ import {  Card, CardSection, Input, Button } from './common';
 class LoginForm extends Component {
   handleEmailChange = text => this.props.changeEmail(text); //changeEmail es un action creator
   handlePasswordChange = text => this.props.changePassword(text); //changePassword es un action creator
+  handleEmployeeList = () => Actions.main();
 
   render() {
     return (
@@ -30,7 +32,7 @@ class LoginForm extends Component {
           />
         </CardSection>
         <CardSection>
-          <Button>
+          <Button whenPressed={this.handleEmployeeList}>
             Login
           </Button>
         </CardSection>

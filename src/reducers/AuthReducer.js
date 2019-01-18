@@ -1,7 +1,7 @@
 /* Recordar que la primera vez que se levante la app, se ejecutara el ciclo de redux y el state
 seria undefined, initial state remedia esto ultimo, puesto que redux no
 admite state undefined */
-import { EMAIL_CHANGED } from '../actions/types';
+import { EMAIL_CHANGED, PASS_CHANGED } from '../actions/types';
 
 const INITIAL_STATE = { 
   email: '',
