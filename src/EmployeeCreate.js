@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import { Picker, Text } from 'react-native';
 import { Card, CardSection, Input, Button  } from './common';
 import { connect } from 'react-redux';
-import { employeeUpdate } from './actions';
+import { employeeUpdate, employeeCreate } from './actions';
 
 class EmployeeCreate extends Component {
 
@@ -16,6 +16,10 @@ class EmployeeCreate extends Component {
   handleNameChange = value => this.props.employeeUpdate({ prop: 'name', value });
   handlePhoneChange = value => this.props.employeeUpdate({ prop: 'phone', value });
   handleShiftChange = value => this.props.employeeUpdate({ prop:'shift', value });
+  handleButtonPress = () => {
+    const { name, phone, shift} = this.props;
+    this.props.employeeCreate( { name, phone, shift: shift ? shift: 'Monday'} );
+  };
   
   /* los componentes default de RN toman los estilos y los aplican,
   los custom no necesariamente, debe hacerse a mano y asegurarse que tomen
@@ -45,7 +49,7 @@ class EmployeeCreate extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>Create</Button>
+          <Button onPress={this.handleButtonPress}>Create</Button>
         </CardSection>
       </Card>
     );
@@ -64,4 +68,4 @@ const mapStateToProps = (state) => {
   return { name, phone, shift};
 };
 
-export default connect(mapStateToProps, {employeeUpdate})(EmployeeCreate);
+export default connect(mapStateToProps, {employeeUpdate, employeeCreate})(EmployeeCreate);
