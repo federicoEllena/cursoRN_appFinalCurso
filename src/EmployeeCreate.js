@@ -1,10 +1,12 @@
 import React,{ Component } from 'react';
 import { Picker, Text } from 'react-native';
-import { Card, CardSection, Input, Button  } from './common';
+import { Card, CardSection, Input, Button, Confirm  } from './common';
 import { connect } from 'react-redux';
 import { employeeUpdate, employeeCreate } from './actions';
 
 class EmployeeCreate extends Component {
+
+  state = { showModal: false };
 
   /*recordar que employeeUpdate(parm) es un action creator que creara una accion
   que luego sera despachada a los reducers a traves de connect*/
@@ -20,6 +22,9 @@ class EmployeeCreate extends Component {
     const { name, phone, shift} = this.props;
     this.props.employeeCreate( { name, phone, shift: shift ? shift: 'Monday'} );
   };
+  onAcceptPress = () => this.setState({showModal: false});
+  onDeclinePress = () => this.setState({showModal: false});
+  
   
   /* los componentes default de RN toman los estilos y los aplican,
   los custom no necesariamente, debe hacerse a mano y asegurarse que tomen
@@ -49,8 +54,14 @@ class EmployeeCreate extends Component {
         </CardSection>
 
         <CardSection>
-          <Button onPress={this.handleButtonPress}>Create</Button>
+          <Button whenPressed={this.handleButtonPress}>Create</Button>
+          <Button whenPressed={() => this.setState(prevState => ({ showModal: !prevState.showModal }))}>Create 2</Button>
         </CardSection>
+        
+        <Confirm visible={this.state.showModal} 
+          onAccept={this.onAcceptPress}
+          onDecline={this.onDeclinePress}
+        >Sure you want to add this employee?</Confirm>        
       </Card>
     );
   }
